@@ -36,11 +36,11 @@ function proxy(id, schema, bag, options){
 
       const state = options.getState();
 
-      if(state[schema.getReducerKey()].entities){
+      if(state.get(schema.getReducerKey()).entities){
         if(options.useMapsForEntityObjects){
-          return state[schema.getReducerKey()].entities[schema.getKey()].get(target.id + '')[name];
+          return state.get(schema.getReducerKey()).entities[schema.getKey()].get(target.id + '')[name];
         }else{
-          return state[schema.getReducerKey()].entities[schema.getKey()][target.id][name];
+          return state.get(schema.getReducerKey()).entities[schema.getKey()][target.id][name];
         }
       }
       return undefined;
@@ -50,9 +50,9 @@ function proxy(id, schema, bag, options){
     },
     has(name){
       if(options.useMapsForEntityObjects){
-        return options.getState()[schema.getReducerKey()].entities[schema.getKey()].get(id + '').has(name);
+        return options.getState().get(schema.getReducerKey()).entities[schema.getKey()].get(id + '').has(name);
       }else{
-        return options.getState()[schema.getReducerKey()].entities[schema.getKey()][id].has(name);
+        return options.getState().get(schema.getReducerKey()).entities[schema.getKey()][id].has(name);
       }
     },
     valueOf : function () {
